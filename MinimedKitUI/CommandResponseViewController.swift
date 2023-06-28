@@ -198,7 +198,7 @@ extension CommandResponseViewController {
                 let response: String
                 do {
                     let schedule = try session.getBasalSchedule(for: .profileB)
-                    var str = String(format: LocalizedString("%1$@ basal schedule entries\n", comment: "The format string describing number of basal schedule entries: (1: number of entries)"), integerFormatter.string(from: NSNumber(value: schedule?.entries.count ?? 0))!)
+                    var str = String(format: LocalizedString("%1$@ 基本计划条目\n", comment: "The format string describing number of basal schedule entries: (1: number of entries)"), integerFormatter.string(from: NSNumber(value: schedule?.entries.count ?? 0))!)
                     for entry in schedule?.entries ?? [] {
                         str += "\(String(describing: entry))\n"
                     }
@@ -223,10 +223,10 @@ extension CommandResponseViewController {
                 do {
                     let status = try session.getCurrentPumpStatus()
 
-                    var str = String(format: LocalizedString("%1$@ Units of insulin remaining\n", comment: "The format string describing units of insulin remaining: (1: number of units)"), measurementFormatter.numberFormatter.string(from: NSNumber(value: status.reservoir))!)
-                    str += String(format: LocalizedString("Battery: %1$@ volts\n", comment: "The format string describing pump battery voltage: (1: battery voltage)"), measurementFormatter.string(from: status.batteryVolts))
-                    str += String(format: LocalizedString("Suspended: %1$@\n", comment: "The format string describing pump suspended state: (1: suspended)"), String(describing: status.suspended))
-                    str += String(format: LocalizedString("Bolusing: %1$@\n", comment: "The format string describing pump bolusing state: (1: bolusing)"), String(describing: status.bolusing))
+                    var str = String(format: LocalizedString("%1$@ 剩余胰岛素单位\n", comment: "The format string describing units of insulin remaining: (1: number of units)"), measurementFormatter.numberFormatter.string(from: NSNumber(value: status.reservoir))!)
+                    str += String(format: LocalizedString("电池：%1$@ 伏\n", comment: "The format string describing pump battery voltage: (1: battery voltage)"), measurementFormatter.string(from: status.batteryVolts))
+                    str += String(format: LocalizedString("已挂起：%1$@\n", comment: "The format string describing pump suspended state: (1: suspended)"), String(describing: status.suspended))
+                    str += String(format: LocalizedString("推注：%1$@\n", comment: "The format string describing pump bolusing state: (1: bolusing)"), String(describing: status.bolusing))
                     
                     response = str
                 } catch let error {

@@ -66,7 +66,7 @@ public final class ReservoirHUDView: LevelHUDView, NibLoadable {
             let time = timeFormatter.string(from: date)
             caption?.text = time
 
-            accessibilityValue = String(format: LocalizedString("%1$@ units remaining at %2$@", comment: "Accessibility format string for (1: localized volume)(2: time)"), units, time)
+            accessibilityValue = String(format: LocalizedString("%2$@ 剩余 %1$@ 单位", comment: "Accessibility format string for (1: localized volume)(2: time)"), units, time)
         }
     }
 

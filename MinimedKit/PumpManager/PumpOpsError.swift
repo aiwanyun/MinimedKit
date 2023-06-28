@@ -40,7 +40,7 @@ extension PumpOpsError: LocalizedError {
         case .bolusInProgress:
             return LocalizedString("推注已经在进行", comment: "Communications error for a bolus currently running")
         case .couldNotDecode(rx: let data, during: let during):
-            return String(format: LocalizedString("Invalid response during %1$@: %2$@", comment: "Format string for failure reason. (1: The operation being performed) (2: The response data)"), String(describing: during), data.hexadecimalString)
+            return String(format: LocalizedString("%1$@期间响应无效：%2$@", comment: "Format string for failure reason. (1: The operation being performed) (2: The response data)"), String(describing: during), data.hexadecimalString)
         case .crosstalk:
             return LocalizedString("检测到另一个泵的通讯", comment: "Description for PumpOpsError.crosstalk")
         case .noResponse:
@@ -50,13 +50,13 @@ extension PumpOpsError: LocalizedError {
         case .rfCommsFailure(let msg):
             return msg
         case .unexpectedResponse(let response, _):
-            return String(format: LocalizedString("Unexpected response %1$@", comment: "Format string for an unexpectedResponse. (2: The response)"), String(describing: response))
+            return String(format: LocalizedString("意外响应%1$@", comment: "Format string for an unexpectedResponse. (2: The response)"), String(describing: response))
         case .unknownPumpErrorCode(let code):
-            return String(format: LocalizedString("Unknown pump error code: %1$@", comment: "The format string description of an unknown pump error code. (1: The specific error code raw value)"), String(describing: code))
+            return String(format: LocalizedString("未知的泵错误代码：%1$@", comment: "The format string description of an unknown pump error code. (1: The specific error code raw value)"), String(describing: code))
         case .unknownPumpModel(let model):
-            return String(format: LocalizedString("Unknown pump model: %@", comment: ""), model)
+            return String(format: LocalizedString("未知的泵型号：%@", comment: ""), model)
         case .unknownResponse(rx: let data, during: let during):
-            return String(format: LocalizedString("Unknown response during %1$@: %2$@", comment: "Format string for an unknown response. (1: The operation being performed) (2: The response data)"), String(describing: during), data.hexadecimalString)
+            return String(format: LocalizedString("%1$@ 期间的未知响应：%2$@", comment: "Format string for an unknown response. (1: The operation being performed) (2: The response data)"), String(describing: during), data.hexadecimalString)
         case .pumpError(let errorCode):
             return String(describing: errorCode)
         case .deviceError(let error):

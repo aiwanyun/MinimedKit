@@ -19,7 +19,7 @@ extension GlucosePageError: LocalizedError {
         case .invalidCRC:
             return LocalizedString("葡萄糖页面失败CRC检查", comment: "Error description for glucose page failing crc check")
         case .unknownEventType(let eventType):
-            return String(format: LocalizedString("Unknown glucose record type: %$1@", comment: "Format string for error description for an unknown record type in a glucose page. (1: event type number)"), eventType)
+            return String(format: LocalizedString("未知的血糖记录类型：%$1@", comment: "Format string for error description for an unknown record type in a glucose page. (1: event type number)"), eventType)
         }
     }
 }
