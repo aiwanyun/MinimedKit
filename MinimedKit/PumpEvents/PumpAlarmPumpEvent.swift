@@ -50,25 +50,25 @@ extension PumpAlarmType {
     var localizedString: String {
         switch self {
         case .autoOff:
-            return LocalizedString("Auto-Off Alarm", comment: "Title for PumpAlarmType.autoOff")
+            return LocalizedString("自动警报", comment: "Title for PumpAlarmType.autoOff")
         case .batteryOutLimitExceeded:
-            return LocalizedString("Battery Out Limit", comment: "Title for PumpAlarmType.batteryOutLimitExceeded")
+            return LocalizedString("电池限制", comment: "Title for PumpAlarmType.batteryOutLimitExceeded")
         case .noDelivery:
-            return LocalizedString("No Delivery Alarm", comment: "Title for PumpAlarmType.noDelivery")
+            return LocalizedString("没有交货警报", comment: "Title for PumpAlarmType.noDelivery")
         case .batteryDepleted:
-            return LocalizedString("Battery Depleted", comment: "Title for PumpAlarmType.batteryDepleted")
+            return LocalizedString("电池耗尽", comment: "Title for PumpAlarmType.batteryDepleted")
         case .deviceReset:
-            return LocalizedString("Device Reset", comment: "Title for deviceReset")
+            return LocalizedString("设备重置", comment: "Title for deviceReset")
         case .deviceResetBatteryIssue17:
-            return LocalizedString("BatteryIssue17", comment: "Title for PumpAlarmType.deviceResetBatteryIssue17")
+            return LocalizedString("电池17", comment: "Title for PumpAlarmType.deviceResetBatteryIssue17")
         case .deviceResetBatteryIssue21:
-            return LocalizedString("BatteryIssue21", comment: "Title for PumpAlarmType.deviceResetBatteryIssue21")
+            return LocalizedString("电池21", comment: "Title for PumpAlarmType.deviceResetBatteryIssue21")
         case .reprogramError:
-            return LocalizedString("Reprogram Error", comment: "Title for PumpAlarmType.reprogramError")
+            return LocalizedString("重编程错误", comment: "Title for PumpAlarmType.reprogramError")
         case .emptyReservoir:
-            return LocalizedString("Empty Reservoir", comment: "Title for PumpAlarmType.emptyReservoir")
+            return LocalizedString("空库", comment: "Title for PumpAlarmType.emptyReservoir")
         case .unknownType:
-            return LocalizedString("Unknown Alarm", comment: "Title for PumpAlarmType.unknownType")
+            return LocalizedString("未知警报", comment: "Title for PumpAlarmType.unknownType")
         }
     }
 }

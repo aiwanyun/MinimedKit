@@ -16,7 +16,7 @@ import RileyLinkBLEKit
 extension CommandResponseViewController {
     typealias T = CommandResponseViewController
 
-    private static let successText = LocalizedString("Succeeded", comment: "A message indicating a command succeeded")
+    private static let successText = LocalizedString("成功", comment: "A message indicating a command succeeded")
 
     static func changeTime(ops: PumpOps?, device: RileyLinkDevice) -> T {
         return T { (completionHandler) -> String in
@@ -34,7 +34,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Changing time…", comment: "Progress message for changing pump time.")
+            return LocalizedString("改变时间…", comment: "Progress message for changing pump time.")
         }
     }
 
@@ -58,7 +58,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Changing time…", comment: "Progress message for changing pump time.")
+            return LocalizedString("改变时间…", comment: "Progress message for changing pump time.")
         }
     }
 
@@ -86,7 +86,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Fetching history…", comment: "Progress message for fetching pump history.")
+            return LocalizedString("获取历史…", comment: "Progress message for fetching pump history.")
         }
     }
 
@@ -114,7 +114,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Fetching glucose…", comment: "Progress message for fetching pump glucose.")
+            return LocalizedString("提取葡萄糖…", comment: "Progress message for fetching pump glucose.")
         }
     }
 
@@ -134,7 +134,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Fetching pump model…", comment: "Progress message for fetching pump model.")
+            return LocalizedString("获取泵模型…", comment: "Progress message for fetching pump model.")
         }
     }
 
@@ -188,7 +188,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Sending button press…", comment: "Progress message for sending button press to pump.")
+            return LocalizedString("发送按钮按…", comment: "Progress message for sending button press to pump.")
         }
     }
 
@@ -212,7 +212,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Reading basal schedule…", comment: "Progress message for reading basal schedule")
+            return LocalizedString("阅读基础时间表…", comment: "Progress message for reading basal schedule")
         }
     }
 
@@ -238,7 +238,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Reading pump status…", comment: "Progress message for reading pump status")
+            return LocalizedString("阅读泵状态…", comment: "Progress message for reading pump status")
         }
     }
 
@@ -254,8 +254,8 @@ extension CommandResponseViewController {
                     let intFormatter = NumberFormatter()
                     let formatString = LocalizedString("%1$@  %2$@/%3$@  %4$@", comment: "The format string for displaying a frequency tune trial. Extra spaces added for emphesis: (1: frequency in MHz)(2: success count)(3: total count)(4: average RSSI)")
 
-                    resultDict[LocalizedString("Best Frequency", comment: "The label indicating the best radio frequency")] = measurementFormatter.string(from: scanResult.bestFrequency)
-                    resultDict[LocalizedString("Trials", comment: "The label indicating the results of each frequency trial")] = scanResult.trials.map({ (trial) -> String in
+                    resultDict[LocalizedString("最佳频率", comment: "The label indicating the best radio frequency")] = measurementFormatter.string(from: scanResult.bestFrequency)
+                    resultDict[LocalizedString("试验", comment: "The label indicating the results of each frequency trial")] = scanResult.trials.map({ (trial) -> String in
 
                         return String(
                             format: formatString,
@@ -271,7 +271,7 @@ extension CommandResponseViewController {
                     if let data = try? JSONSerialization.data(withJSONObject: resultDict, options: .prettyPrinted), let string = String(data: data, encoding: .utf8) {
                         responseText = string
                     } else {
-                        responseText = LocalizedString("No response", comment: "Message display when no response from tuning pump")
+                        responseText = LocalizedString("没有反应", comment: "Message display when no response from tuning pump")
                     }
 
                     response = responseText
@@ -284,7 +284,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return LocalizedString("Tuning radio…", comment: "Progress message for tuning radio")
+            return LocalizedString("调音收音机…", comment: "Progress message for tuning radio")
         }
     }
 }

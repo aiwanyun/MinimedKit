@@ -64,11 +64,11 @@ struct MinimedPumpSettingsView: View {
                 }
             }
 
-            Section(header: SectionHeader(label: LocalizedString("Configuration", comment: "The title of the configuration section in MinimedPumpManager settings")))
+            Section(header: SectionHeader(label: LocalizedString("配置", comment: "The title of the configuration section in MinimedPumpManager settings")))
             {
                 NavigationLink(destination: InsulinTypeSetting(initialValue: viewModel.pumpManager.state.insulinType, supportedInsulinTypes: supportedInsulinTypes, allowUnsetInsulinType: false, didChange: viewModel.didChangeInsulinType)) {
                     HStack {
-                        Text(LocalizedString("Insulin Type", comment: "Text for confidence reminders navigation link")).foregroundColor(Color.primary)
+                        Text(LocalizedString("胰岛素类型", comment: "Text for confidence reminders navigation link")).foregroundColor(Color.primary)
                         if let currentTitle = viewModel.pumpManager.state.insulinType?.brandName {
                             Spacer()
                             Text(currentTitle)
@@ -78,7 +78,7 @@ struct MinimedPumpSettingsView: View {
                 }
                 NavigationLink(destination: BatteryTypeSelectionView(batteryType: $viewModel.batteryChemistryType)) {
                     HStack {
-                        Text(LocalizedString("Pump Battery Type", comment: "Text for medtronic pump battery type")).foregroundColor(Color.primary)
+                        Text(LocalizedString("泵电池类型", comment: "Text for medtronic pump battery type")).foregroundColor(Color.primary)
                         Spacer()
                         Text(viewModel.batteryChemistryType.description)
                             .foregroundColor(.secondary)
@@ -87,7 +87,7 @@ struct MinimedPumpSettingsView: View {
 
                 NavigationLink(destination: DataSourceSelectionView(batteryType: $viewModel.preferredDataSource)) {
                     HStack {
-                        Text(LocalizedString("Preferred Data Source", comment: "Text for medtronic pump preferred data source")).foregroundColor(Color.primary)
+                        Text(LocalizedString("首选数据源", comment: "Text for medtronic pump preferred data source")).foregroundColor(Color.primary)
                         Spacer()
                         Text(viewModel.preferredDataSource.description)
                             .foregroundColor(.secondary)
@@ -97,11 +97,11 @@ struct MinimedPumpSettingsView: View {
                 if viewModel.pumpManager.state.pumpModel.hasMySentry {
                     NavigationLink(destination: UseMySentrySelectionView(mySentryConfig: $viewModel.mySentryConfig)) {
                         HStack {
-                            Text(LocalizedString("Use MySentry", comment: "Text for medtronic pump to use MySentry")).foregroundColor(Color.primary)
+                            Text(LocalizedString("使用Mysentry", comment: "Text for medtronic pump to use MySentry")).foregroundColor(Color.primary)
                             Spacer()
                             Text((viewModel.mySentryConfig == .useMySentry ?
-                                  LocalizedString("Yes", comment: "Value string for MySentry config when MySentry is being used") :
-                                    LocalizedString("No", comment: "Value string for MySentry config when MySentry is not being used"))
+                                  LocalizedString("是的", comment: "Value string for MySentry config when MySentry is being used") :
+                                    LocalizedString("不", comment: "Value string for MySentry config when MySentry is not being used"))
                             )
                             .foregroundColor(.secondary)
                         }
@@ -110,7 +110,7 @@ struct MinimedPumpSettingsView: View {
             }
 
             Section(header: HStack {
-                Text(LocalizedString("Devices", comment: "Header for devices section of RileyLinkSetupView"))
+                Text(LocalizedString("设备", comment: "Header for devices section of RileyLinkSetupView"))
                 Spacer()
                 ProgressView()
             }) {
@@ -147,16 +147,16 @@ struct MinimedPumpSettingsView: View {
 
             Section() {
                 HStack {
-                    Text(LocalizedString("Pump Battery Remaining", comment: "Text for medtronic pump battery percent remaining")).foregroundColor(Color.primary)
+                    Text(LocalizedString("泵电池剩余", comment: "Text for medtronic pump battery percent remaining")).foregroundColor(Color.primary)
                     Spacer()
                     if let chargeRemaining = viewModel.pumpManager.status.pumpBatteryChargeRemaining {
                         Text(String("\(Int(round(chargeRemaining * 100)))%"))
                     } else {
-                        Text(String(LocalizedString("unknown", comment: "Text to indicate battery percentage is unknown")))
+                        Text(String(LocalizedString("未知", comment: "Text to indicate battery percentage is unknown")))
                     }
                 }
                 HStack {
-                    Text(LocalizedString("Pump Time", comment: "The title of the command to change pump time zone"))
+                    Text(LocalizedString("抽水时间", comment: "The title of the command to change pump time zone"))
                     Spacer()
                     if viewModel.isClockOffset {
                         Image(systemName: "clock.fill")
@@ -167,7 +167,7 @@ struct MinimedPumpSettingsView: View {
                 }
                 if viewModel.synchronizingTime {
                     HStack {
-                        Text(LocalizedString("Adjusting Pump Time...", comment: "Text indicating ongoing pump time synchronization"))
+                        Text(LocalizedString("调整泵的时间...", comment: "Text indicating ongoing pump time synchronization"))
                             .foregroundColor(.secondary)
                         Spacer()
                         ActivityIndicator(isAnimating: .constant(true), style: .medium)
@@ -176,7 +176,7 @@ struct MinimedPumpSettingsView: View {
                     Button(action: {
                         showSyncTimeOptions = true
                     }) {
-                        Text(LocalizedString("Sync to Current Time", comment: "The title of the command to change pump time zone"))
+                        Text(LocalizedString("同步到当前时间", comment: "The title of the command to change pump time zone"))
                     }
                     .actionSheet(isPresented: $showSyncTimeOptions) {
                         syncPumpTimeActionSheet
@@ -186,11 +186,11 @@ struct MinimedPumpSettingsView: View {
 
 
             Section {
-                LabeledValueView(label: LocalizedString("Pump ID", comment: "The title text for the pump ID config value"),
+                LabeledValueView(label: LocalizedString("泵ID", comment: "The title text for the pump ID config value"),
                                  value: viewModel.pumpManager.state.pumpID)
-                LabeledValueView(label: LocalizedString("Firmware Version", comment: "The title of the cell showing the pump firmware version"),
+                LabeledValueView(label: LocalizedString("固件版本", comment: "The title of the cell showing the pump firmware version"),
                                  value: String(describing: viewModel.pumpManager.state.pumpFirmwareVersion))
-                LabeledValueView(label: LocalizedString("Region", comment: "The title of the cell showing the pump region"),
+                LabeledValueView(label: LocalizedString("地区", comment: "The title of the cell showing the pump region"),
                                  value: String(describing: viewModel.pumpManager.state.pumpRegion))
             }
 
@@ -203,13 +203,13 @@ struct MinimedPumpSettingsView: View {
         .alert(item: $viewModel.activeAlert, content: { alert in
             switch alert {
             case .suspendError(let error):
-                return Alert(title: Text(LocalizedString("Error Suspending", comment: "The alert title for a suspend error")),
+                return Alert(title: Text(LocalizedString("暂停错误", comment: "The alert title for a suspend error")),
                              message: Text(errorText(error)))
              case .resumeError(let error):
-                return Alert(title: Text(LocalizedString("Error Resuming", comment: "The alert title for a resume error")),
+                return Alert(title: Text(LocalizedString("恢复错误", comment: "The alert title for a resume error")),
                              message: Text(errorText(error)))
             case .syncTimeError(let error):
-                return Alert(title: Text(LocalizedString("Error Syncing Time", comment: "The alert title for an error while synching time")),
+                return Alert(title: Text(LocalizedString("错误同步时间", comment: "The alert title for an error while synching time")),
                              message: Text(errorText(error)))
             }
         })
@@ -221,9 +221,9 @@ struct MinimedPumpSettingsView: View {
 
     var deliverySectionTitle: String {
         if self.viewModel.isScheduledBasal {
-            return LocalizedString("Scheduled Basal", comment: "Title of insulin delivery section")
+            return LocalizedString("计划的基础", comment: "Title of insulin delivery section")
         } else {
-            return LocalizedString("Insulin Delivery", comment: "Title of insulin delivery section")
+            return LocalizedString("胰岛素输送", comment: "Title of insulin delivery section")
         }
     }
 
@@ -258,7 +258,7 @@ struct MinimedPumpSettingsView: View {
                         .font(.system(size: 34))
                         .fixedSize()
                         .foregroundColor(.secondary)
-                    Text(LocalizedString("Changing", comment: "Text shown in basal rate space when basal is changing"))
+                    Text(LocalizedString("更改", comment: "Text shown in basal rate space when basal is changing"))
                         .fontWeight(.bold)
                         .fixedSize()
                         .foregroundColor(.secondary)
@@ -269,7 +269,7 @@ struct MinimedPumpSettingsView: View {
                         .font(.system(size: 34))
                         .fixedSize()
                         .foregroundColor(guidanceColors.warning)
-                    Text(LocalizedString("Unknown", comment: "Text shown in basal rate space when delivery status is unknown"))
+                    Text(LocalizedString("未知", comment: "Text shown in basal rate space when delivery status is unknown"))
                         .fontWeight(.bold)
                         .fixedSize()
                 }
@@ -290,7 +290,7 @@ struct MinimedPumpSettingsView: View {
 
     var reservoirStatus: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
+            Text(LocalizedString("胰岛素剩余", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
             if let reservoirReading = viewModel.reservoirReading,
                let reservoirLevelHighlightState = viewModel.reservoirLevelHighlightState,
@@ -310,13 +310,13 @@ struct MinimedPumpSettingsView: View {
 
     var syncPumpTimeActionSheet: ActionSheet {
         ActionSheet(
-            title: Text(LocalizedString("Time Change Detected", comment: "Title for pod sync time action sheet.")),
-            message: Text(LocalizedString("The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?", comment: "Message for pod sync time action sheet")),
+            title: Text(LocalizedString("时间变化检测到", comment: "Title for pod sync time action sheet.")),
+            message: Text(LocalizedString("泵上的时间与当前时间不同。您想将泵上的时间更新到当前时间吗？", comment: "Message for pod sync time action sheet")),
             buttons: [
-                .default(Text(LocalizedString("Yes, Sync to Current Time", comment: "Button text to confirm pump time sync"))) {
+                .default(Text(LocalizedString("是的，与当前时间同步", comment: "Button text to confirm pump time sync"))) {
                     self.viewModel.changeTimeZoneTapped()
                 },
-                .cancel(Text(LocalizedString("No, Keep Pump As Is", comment: "Button text to cancel pump time sync")))
+                .cancel(Text(LocalizedString("不，保持泵原样", comment: "Button text to cancel pump time sync")))
             ]
         )
     }
@@ -351,13 +351,13 @@ struct MinimedPumpSettingsView: View {
         Button(action: {
             showingDeletionSheet = true
         }, label: {
-            Text(LocalizedString("Delete Pump", comment: "Button label for removing Pump"))
+            Text(LocalizedString("删除泵", comment: "Button label for removing Pump"))
                 .foregroundColor(.red)
         }).actionSheet(isPresented: $showingDeletionSheet) {
             ActionSheet(
-                title: Text(LocalizedString("Are you sure you want to delete this Pump?", comment: "Text to confirm delete this pump")),
+                title: Text(LocalizedString("您确定要删除此泵吗？", comment: "Text to confirm delete this pump")),
                 buttons: [
-                    .destructive(Text(LocalizedString("Delete Pump", comment: "Text to delete pump"))) {
+                    .destructive(Text(LocalizedString("删除泵", comment: "Text to delete pump"))) {
                         viewModel.deletePump()
                     },
                     .cancel(),

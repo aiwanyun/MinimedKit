@@ -29,7 +29,7 @@ extension Collection where Element == TimestampedHistoryEvent {
 
             switch event.pumpEvent {
             case let bolus as BolusNormalPumpEvent:
-                title = LocalizedString("Bolus", comment: "Event title for bolus")
+                title = LocalizedString("推注", comment: "Event title for bolus")
                 let bolusEndDate: Date
                 if let lastSuspend = lastSuspend, bolus.programmed != bolus.amount, lastSuspend.startDate > event.date {
                     bolusEndDate = lastSuspend.startDate
@@ -44,25 +44,25 @@ extension Collection where Element == TimestampedHistoryEvent {
                 }
                 dose = DoseEntry(type: .bolus, startDate: event.date, endDate: bolusEndDate, value: bolus.programmed, unit: .units, deliveredUnits: bolus.amount, automatic: automatic, isMutable: bolus.isMutable(atDate: now, forPump: model), wasProgrammedByPumpUI: !bolus.wasRemotelyTriggered)
             case let suspendEvent as SuspendPumpEvent:
-                title = LocalizedString("Suspend", comment: "Event title for suspend")
+                title = LocalizedString("暂停", comment: "Event title for suspend")
                 dose = DoseEntry(suspendDate: event.date, wasProgrammedByPumpUI: !suspendEvent.wasRemotelyTriggered)
                 lastSuspend = dose
             case let resumeEvent as ResumePumpEvent:
-                title = LocalizedString("Resume", comment: "Event title for resume")
+                title = LocalizedString("恢复", comment: "Event title for resume")
                 dose = DoseEntry(resumeDate: event.date, wasProgrammedByPumpUI: !resumeEvent.wasRemotelyTriggered)
             case let temp as TempBasalPumpEvent:
                 if case .Absolute = temp.rateType {
                     lastTempBasal = DoseEntry(type: .tempBasal, startDate: event.date, value: temp.rate, unit: .unitsPerHour, isMutable: false, wasProgrammedByPumpUI: !temp.wasRemotelyTriggered)
                     continue
                 } else {
-                    title = LocalizedString("Percent Temp Basal", comment: "Event title for percent based temp basal")
+                    title = LocalizedString("温度基础百分比", comment: "Event title for percent based temp basal")
                 }
             case let tempDuration as TempBasalDurationPumpEvent:
                 if let lastTemp = lastTempBasal, lastTemp.startDate == event.date {
                     if tempDuration.duration == 0 {
-                        title = LocalizedString("Cancel Temp Basal", comment: "Event title for temp basal cancel")
+                        title = LocalizedString("取消临时基础", comment: "Event title for temp basal cancel")
                     } else {
-                        title = LocalizedString("Temp Basal", comment: "Event title for temporary basal rate start")
+                        title = LocalizedString("温度基", comment: "Event title for temporary basal rate start")
                     }
 
                     // Temp basal events in mdt pump history are not mutable, but we report mutability to Loop as
@@ -84,7 +84,7 @@ extension Collection where Element == TimestampedHistoryEvent {
                     )
                 }
             case let basal as BasalProfileStartPumpEvent:
-                title = LocalizedString("Scheduled Basal", comment: "Event title for starting scheduled basal")
+                title = LocalizedString("计划的基础", comment: "Event title for starting scheduled basal")
                 dose = DoseEntry(
                     type: .basal,
                     startDate: event.date,
@@ -95,7 +95,7 @@ extension Collection where Element == TimestampedHistoryEvent {
                     isMutable: false
                 )
             case is RewindPumpEvent:
-                title = LocalizedString("Rewind", comment: "Event title for rewind")
+                title = LocalizedString("倒带", comment: "Event title for rewind")
                 eventType = .rewind
 
                 /* 
@@ -108,7 +108,7 @@ extension Collection where Element == TimestampedHistoryEvent {
                 dose = DoseEntry(suspendDate: event.date)
                 isRewound = true
             case is PrimePumpEvent:
-                title = LocalizedString("Prime", comment: "Event title for prime pump event")
+                title = LocalizedString("主要的", comment: "Event title for prime pump event")
                 eventType = .prime
 
                 if isRewound {
@@ -124,7 +124,7 @@ extension Collection where Element == TimestampedHistoryEvent {
                 }
                 break
             case let alarm as ClearAlarmPumpEvent:
-                title = LocalizedString("Clear Alarm", comment: "Event title for clear alarm pump event")
+                title = LocalizedString("清除警报", comment: "Event title for clear alarm pump event")
                 eventType = .alarmClear
 
                 if case .noDelivery = alarm.alarmType {
@@ -132,28 +132,28 @@ extension Collection where Element == TimestampedHistoryEvent {
                 }
                 break
             case is JournalEntryMealMarkerPumpEvent:
-                title = LocalizedString("Meal", comment: "Event title for JournalEntryMealMarkerPumpEvent")
+                title = LocalizedString("一顿饭", comment: "Event title for JournalEntryMealMarkerPumpEvent")
                 break
             case is JournalEntryPumpLowBatteryPumpEvent:
-                title = LocalizedString("Low Battery", comment: "Event title for JournalEntryPumpLowBatteryPumpEvent")
+                title = LocalizedString("低电量", comment: "Event title for JournalEntryPumpLowBatteryPumpEvent")
                 break
             case is JournalEntryPumpLowReservoirPumpEvent:
-                title = LocalizedString("Low Reservoir", comment: "Event title for JournalEntryPumpLowReservoirPumpEvent")
+                title = LocalizedString("低水箱", comment: "Event title for JournalEntryPumpLowReservoirPumpEvent")
                 break
             case is ChangeBasalProfilePumpEvent:
-                title = LocalizedString("Change Basal Schedule", comment: "Event title for ChangeBasalProfilePumpEvent")
+                title = LocalizedString("更改基础时间表", comment: "Event title for ChangeBasalProfilePumpEvent")
                 break
             case is ChangeBasalProfilePatternPumpEvent:
-                title = LocalizedString("Change Basal Profile Schedule", comment: "Event title for ChangeBasalProfilePatternPumpEvent")
+                title = LocalizedString("更改基础概况时间表", comment: "Event title for ChangeBasalProfilePatternPumpEvent")
                 break
             case is SelectBasalProfilePumpEvent:
-                title = LocalizedString("Select Profile", comment: "Event title for SelectBasalProfilePumpEvent")
+                title = LocalizedString("选择个人资料", comment: "Event title for SelectBasalProfilePumpEvent")
                 break
             case is ChangeTimePumpEvent:
-                title = LocalizedString("Change Time", comment: "Event title for ChangeTimePumpEvent")
+                title = LocalizedString("改变时间", comment: "Event title for ChangeTimePumpEvent")
                 break
             case is NewTimePumpEvent:
-                title = LocalizedString("New Time", comment: "Event title for NewTimePumpEvent")
+                title = LocalizedString("新时间", comment: "Event title for NewTimePumpEvent")
                 break
             default:
                 break

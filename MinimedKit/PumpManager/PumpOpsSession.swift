@@ -37,7 +37,7 @@ extension SetBolusError: LocalizedError {
         case .certain(let error):
             return error.recoverySuggestion
         case .uncertain:
-            return LocalizedString("Please check your pump bolus history to determine if the bolus was delivered.", comment: "recoverySuggestion for uncertain bolus")
+            return LocalizedString("请检查您的泵推注历史记录，以确定推注是否已交付。", comment: "recoverySuggestion for uncertain bolus")
         }
     }
 
@@ -46,7 +46,7 @@ extension SetBolusError: LocalizedError {
         case .certain(let error):
             return error.errorDescription
         case .uncertain:
-            return LocalizedString("Loop sent a bolus command to the pump, but was unable to confirm that the pump received the command. For safety, Loop will assume the bolus was delivered. When Loop eventually fetches history from the pump, and the estimated bolus finish time is passed, Loop will update its records of delivery to match what the pump reports.", comment: "Help anchor for uncertain bolus")
+            return LocalizedString("Loop向泵发送了推注命令，但无法确认该泵接收了命令。为了安全起见，循环将假设推注已交付。当Loop最终从泵中获取历史记录，并通过了估计的推注完成时间时，LOOP将更新其交付记录以匹配泵的报告。", comment: "Help anchor for uncertain bolus")
         }
     }
 }

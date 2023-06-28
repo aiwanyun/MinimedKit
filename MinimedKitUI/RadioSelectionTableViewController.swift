@@ -19,7 +19,7 @@ extension RadioSelectionTableViewController: IdentifiableClass {
 
         vc.selectedIndex = value.rawValue
         vc.options = (0..<2).compactMap({ InsulinDataSource(rawValue: $0) }).map { String(describing: $0) }
-        vc.contextHelp = LocalizedString("Insulin delivery can be determined from the pump by either interpreting the event history or comparing the reservoir volume over time. Reading event history allows for a more accurate status graph and uploading up-to-date treatment data to Nightscout, at the cost of faster pump battery drain and the possibility of a higher radio error rate compared to reading only reservoir volume. If the selected source cannot be used for any reason, the system will attempt to fall back to the other option.", comment: "Instructions on selecting an insulin data source")
+        vc.contextHelp = LocalizedString("可以通过解释事件历史记录或随着时间的推移比较储层体积来确定胰岛素输送。阅读事件历史记录可提供更准确的状态图，并将最新的治疗数据上传到NightScout，以更快的泵电池排水速度，并且与仅阅读储层量相比，无线电错误率更高。如果由于任何原因无法使用所选源，则系统将尝试归还其他选项。", comment: "Instructions on selecting an insulin data source")
 
         return vc
     }
@@ -29,7 +29,7 @@ extension RadioSelectionTableViewController: IdentifiableClass {
 
         vc.selectedIndex = value.rawValue
         vc.options = (0..<2).compactMap({ BatteryChemistryType(rawValue: $0) }).map { String(describing: $0) }
-        vc.contextHelp = LocalizedString("Alkaline and Lithium batteries decay at differing rates. Alkaline tend to have a linear voltage drop over time whereas lithium cell batteries tend to maintain voltage until halfway through their lifespan. Under normal usage in a Non-MySentry compatible Minimed (x22/x15) insulin pump running Loop, Alkaline batteries last approximately 4 to 5 days. Lithium batteries last between 1-2 weeks. This selection will use different battery voltage decay rates for each of the battery chemistry types and alert the user when a battery is approximately 8 to 10 hours from failure.", comment: "Instructions on selecting battery chemistry type")
+        vc.contextHelp = LocalizedString("碱性和锂电池以不同的速度衰减。随着时间的推移，碱性电压往往会降低线性电压，而锂电池电池往往会保持电压直到其寿命中途。在非摩sentry兼容的最小化（X22/X15）胰岛素泵运行环的正常使用下，碱性电池持续约4至5天。锂电池持续1-2周。此选择将对每种电池化学类型的各种电池电压衰减率使用不同，并在电池故障大约8至10小时时提醒用户。", comment: "Instructions on selecting battery chemistry type")
 
         return vc
     }
@@ -40,7 +40,7 @@ extension RadioSelectionTableViewController: IdentifiableClass {
         vc.selectedIndex = value ? 0 : 1
             
         vc.options = ["Use MySentry", "Do not use MySentry"]
-        vc.contextHelp = LocalizedString("Medtronic pump models 523, 723, 554, and 754 have a feature called 'MySentry' that periodically broadcasts the reservoir and pump battery levels.  Listening for these broadcasts allows Loop to communicate with the pump less frequently, which can increase pump battery life.  However, when using this feature the RileyLink stays awake more of the time and uses more of its own battery.  Enabling this may lengthen pump battery life, while disabling it may lengthen RileyLink battery life. This setting is ignored for other pump models.", comment: "Instructions on selecting setting for MySentry")
+        vc.contextHelp = LocalizedString("Medtronic Pump型号523、723、554和754具有称为“ Mysentry”的功能，该功能会定期广播储层和泵电池水平。聆听这些广播可以使循环与泵通信的频率较低，从而可以增加泵电池寿命。但是，当使用此功能时，Rileylink会在更多的时间内保持清醒，并使用更多自己的电池。实现此功能可能会延长泵电池的寿命，同时禁用电池可能会延长Rileylink电池寿命。对于其他泵模型，忽略了此设置。", comment: "Instructions on selecting setting for MySentry")
 
         return vc
     }

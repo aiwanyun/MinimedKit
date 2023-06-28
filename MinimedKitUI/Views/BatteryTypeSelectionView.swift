@@ -18,7 +18,7 @@ struct BatteryTypeSelectionView: View {
         VStack {
             List {
                 Section {
-                    Text(LocalizedString("Choose the type of battery you are using in your pump for better alerting about low battery conditions.", comment: "Instructions on selecting battery chemistry type"))
+                    Text(LocalizedString("选择您在泵中使用的电池类型，以更好地警告低电池状况。", comment: "Instructions on selecting battery chemistry type"))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.vertical, 10)
                 }
@@ -31,6 +31,6 @@ struct BatteryTypeSelectionView: View {
             }
         }
         .insetGroupedListStyle()
-        .navigationTitle(LocalizedString("Pump Battery Type", comment: "navigation title for pump battery type selection"))
+        .navigationTitle(LocalizedString("泵电池类型", comment: "navigation title for pump battery type selection"))
     }
 }

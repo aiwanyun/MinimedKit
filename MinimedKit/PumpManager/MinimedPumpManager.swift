@@ -267,7 +267,7 @@ public class MinimedPumpManager: RileyLinkPumpManager {
             self.pumpDelegate.notify { delegate in
                 let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: "lowRLBattery")
                 let alertBody = String(format: LocalizedString("\"%1$@\" has a low battery", comment: "Format string for low battery alert body for RileyLink. (1: device name)"), device.name ?? "unnamed")
-                let content = Alert.Content(title: LocalizedString("Low RileyLink Battery", comment: "Title for RileyLink low battery alert"), body: alertBody, acknowledgeActionButtonLabel: LocalizedString("OK", comment: "Acknowledge button label for RileyLink low battery alert"))
+                let content = Alert.Content(title: LocalizedString("低分子电池", comment: "Title for RileyLink low battery alert"), body: alertBody, acknowledgeActionButtonLabel: LocalizedString("好的", comment: "Acknowledge button label for RileyLink low battery alert"))
                 delegate?.issueAlert(Alert(identifier: identifier, foregroundContent: content, backgroundContent: content, trigger: .immediate))
             }
         }
@@ -469,14 +469,14 @@ extension MinimedPumpManager {
 
         if case .suspended = state.suspendState {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString("Insulin Suspended", comment: "Status highlight that insulin delivery was suspended."),
+                localizedMessage: LocalizedString("胰岛素暂停", comment: "Status highlight that insulin delivery was suspended."),
                 imageName: "pause.circle.fill",
                 state: .warning)
         }
         
         if date.timeIntervalSince(lastSync(for: state, recents: recents) ?? .distantPast) > .minutes(12) {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString("Signal Loss", comment: "Status highlight when communications with the pod haven't happened recently."),
+                localizedMessage: LocalizedString("信号损失", comment: "Status highlight when communications with the pod haven't happened recently."),
                 imageName: "exclamationmark.circle.fill",
                 state: .critical)
         }
@@ -497,9 +497,9 @@ extension MinimedPumpManager {
     }
 
     private var pumpBatteryLowAlert: Alert {
-        let title = LocalizedString("Pump Battery Low", comment: "The notification title for a low pump battery")
-        let body = LocalizedString("Change the pump battery immediately", comment: "The notification alert describing a low pump battery")
-        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("Dismiss", comment: "Default alert dismissal"))
+        let title = LocalizedString("泵电池低", comment: "The notification title for a low pump battery")
+        let body = LocalizedString("立即更换泵电池", comment: "The notification alert describing a low pump battery")
+        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("解雇", comment: "Default alert dismissal"))
         return Alert(identifier: Self.pumpBatteryLowAlertIdentifier, foregroundContent: content, backgroundContent: content, trigger: .immediate)
     }
     
@@ -562,9 +562,9 @@ extension MinimedPumpManager {
     }
 
     private var pumpReservoirEmptyAlert: Alert {
-        let title = LocalizedString("Pump Reservoir Empty", comment: "The notification title for an empty pump reservoir")
-        let body = LocalizedString("Change the pump reservoir now", comment: "The notification alert describing an empty pump reservoir")
-        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("Ok", comment: "Default alert dismissal"))
+        let title = LocalizedString("泵储水箱空", comment: "The notification title for an empty pump reservoir")
+        let body = LocalizedString("立即更换泵油箱", comment: "The notification alert describing an empty pump reservoir")
+        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("好的", comment: "Default alert dismissal"))
         return Alert(identifier: Self.pumpReservoirEmptyAlertIdentifier, foregroundContent: content, backgroundContent: content, trigger: .immediate)
     }
 
@@ -573,7 +573,7 @@ extension MinimedPumpManager {
     }
 
     private func pumpReservoirLowAlertForAmount(_ units: Double, andTimeRemaining remaining: TimeInterval?) -> Alert {
-        let title = LocalizedString("Pump Reservoir Low", comment: "The notification title for a low pump reservoir")
+        let title = LocalizedString("泵储层低", comment: "The notification title for a low pump reservoir")
 
         let unitsString = NumberFormatter.localizedString(from: NSNumber(value: units), number: .decimal)
 
@@ -592,7 +592,7 @@ extension MinimedPumpManager {
             body = String(format: LocalizedString("%1$@ U left", comment: "Low reservoir alert format string. (1: Number of units remaining)"), unitsString)
         }
 
-        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("Ok", comment: "Default alert dismissal"))
+        let content = Alert.Content(title: title, body: body, acknowledgeActionButtonLabel: LocalizedString("好的", comment: "Default alert dismissal"))
         return Alert(identifier: Self.pumpReservoirLowAlertIdentifier, foregroundContent: content, backgroundContent: content, trigger: .immediate)
     }
 
@@ -913,7 +913,7 @@ extension MinimedPumpManager {
 // MARK: - PumpManager
 extension MinimedPumpManager: PumpManager {
     
-    public static let localizedTitle = LocalizedString("Minimed 500/700 Series", comment: "Generic title of the minimed pump manager")
+    public static let localizedTitle = LocalizedString("最小化500/700系列", comment: "Generic title of the minimed pump manager")
 
     public var localizedTitle: String {
         return String(format: LocalizedString("Minimed %@", comment: "Pump title (1: model number)"), state.pumpModel.rawValue)

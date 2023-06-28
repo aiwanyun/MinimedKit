@@ -38,15 +38,15 @@ extension PumpOpsError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .bolusInProgress:
-            return LocalizedString("A bolus is already in progress", comment: "Communications error for a bolus currently running")
+            return LocalizedString("推注已经在进行", comment: "Communications error for a bolus currently running")
         case .couldNotDecode(rx: let data, during: let during):
             return String(format: LocalizedString("Invalid response during %1$@: %2$@", comment: "Format string for failure reason. (1: The operation being performed) (2: The response data)"), String(describing: during), data.hexadecimalString)
         case .crosstalk:
-            return LocalizedString("Comms with another pump detected", comment: "Description for PumpOpsError.crosstalk")
+            return LocalizedString("检测到另一个泵的通讯", comment: "Description for PumpOpsError.crosstalk")
         case .noResponse:
-            return LocalizedString("Pump did not respond", comment: "Description for PumpOpsError.noResponse")
+            return LocalizedString("泵没有回应", comment: "Description for PumpOpsError.noResponse")
         case .pumpSuspended:
-            return LocalizedString("Pump is suspended", comment: "Description for PumpOpsError.pumpSuspended")
+            return LocalizedString("泵被悬挂", comment: "Description for PumpOpsError.pumpSuspended")
         case .rfCommsFailure(let msg):
             return msg
         case .unexpectedResponse(let response, _):

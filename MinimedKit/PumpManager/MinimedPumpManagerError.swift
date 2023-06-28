@@ -23,21 +23,21 @@ extension MinimedPumpManagerError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noRileyLink:
-            return LocalizedString("No RileyLink Connected", comment: "Error description when no rileylink connected")
+            return LocalizedString("无赖赖氏链接连接", comment: "Error description when no rileylink connected")
         case .bolusInProgress:
-            return LocalizedString("Bolus in Progress", comment: "Error description when failure due to bolus in progress")
+            return LocalizedString("推注正在进行", comment: "Error description when failure due to bolus in progress")
         case .pumpSuspended:
-            return LocalizedString("Pump is Suspended", comment: "Error description when failure due to pump suspended")
+            return LocalizedString("泵被悬挂", comment: "Error description when failure due to pump suspended")
         case .insulinTypeNotConfigured:
-            return LocalizedString("Insulin Type is not configured", comment: "Error description for MinimedPumpManagerError.insulinTypeNotConfigured")
+            return LocalizedString("胰岛素类型未配置", comment: "Error description for MinimedPumpManagerError.insulinTypeNotConfigured")
         case .noDate:
             return nil
         case .tuneFailed(let error):
-            return [LocalizedString("RileyLink radio tune failed", comment: "Error description for tune failure"), error.errorDescription].compactMap({ $0 }).joined(separator: ": ")
+            return [LocalizedString("Rileylink无线电曲失败", comment: "Error description for tune failure"), error.errorDescription].compactMap({ $0 }).joined(separator: ": ")
         case .commsError(let error):
             return error.errorDescription
         case .storageFailure:
-            return LocalizedString("Unable to store pump data", comment: "Error description when storage fails")
+            return LocalizedString("无法存储泵数据", comment: "Error description when storage fails")
         }
     }
 
@@ -53,9 +53,9 @@ extension MinimedPumpManagerError: LocalizedError {
     public var recoverySuggestion: String? {
         switch self {
         case .noRileyLink:
-            return LocalizedString("Make sure your RileyLink is nearby and powered on", comment: "Recovery suggestion")
+            return LocalizedString("确保您的Rileylink在附近并加油", comment: "Recovery suggestion")
         case .insulinTypeNotConfigured:
-            return LocalizedString("Go to pump settings and select insulin type", comment: "Recovery suggestion for MinimedPumpManagerError.insulinTypeNotConfigured")
+            return LocalizedString("转到泵设置并选择胰岛素类型", comment: "Recovery suggestion for MinimedPumpManagerError.insulinTypeNotConfigured")
         case .tuneFailed(let error):
             return error.recoverySuggestion
         default:

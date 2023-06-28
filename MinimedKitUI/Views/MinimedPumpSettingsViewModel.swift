@@ -42,9 +42,9 @@ enum MySentryConfig: Int, Identifiable, CaseIterable {
     var localizedDescription: String {
         switch self {
         case .useMySentry:
-            return LocalizedString("Use MySentry", comment: "Description for option to use MySentry")
+            return LocalizedString("使用Mysentry", comment: "Description for option to use MySentry")
         case .doNotUseMySentry:
-            return LocalizedString("Do not use MySentry", comment: "Description for option to not use MySentry")
+            return LocalizedString("不要使用Mysentry", comment: "Description for option to not use MySentry")
         }
     }
 }
@@ -283,17 +283,17 @@ extension PumpManagerStatus.BasalDeliveryState {
     var buttonLabelText: String {
         switch self {
         case .active, .tempBasal:
-            return LocalizedString("Suspend Delivery", comment: "Title text for button to suspend insulin delivery")
+            return LocalizedString("暂停交货", comment: "Title text for button to suspend insulin delivery")
         case .suspending:
-            return LocalizedString("Suspending", comment: "Title text for button when insulin delivery is in the process of being stopped")
+            return LocalizedString("暂停", comment: "Title text for button when insulin delivery is in the process of being stopped")
         case .suspended:
-            return LocalizedString("Resume Delivery", comment: "Title text for button to resume insulin delivery")
+            return LocalizedString("恢复交付", comment: "Title text for button to resume insulin delivery")
         case .resuming:
-            return LocalizedString("Resuming", comment: "Title text for button when insulin delivery is in the process of being resumed")
+            return LocalizedString("恢复", comment: "Title text for button when insulin delivery is in the process of being resumed")
         case .initiatingTempBasal:
-            return LocalizedString("Starting Temp Basal", comment: "Title text for suspend resume button when temp basal starting")
+            return LocalizedString("启动温度基础", comment: "Title text for suspend resume button when temp basal starting")
         case .cancelingTempBasal:
-            return LocalizedString("Canceling Temp Basal", comment: "Title text for suspend resume button when temp basal canceling")
+            return LocalizedString("取消温度基础", comment: "Title text for suspend resume button when temp basal canceling")
         }
     }
 

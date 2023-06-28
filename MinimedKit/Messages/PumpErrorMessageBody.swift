@@ -18,20 +18,20 @@ public enum PumpErrorCode: UInt8, CustomStringConvertible {
     public var description: String {
         switch self {
         case .commandRefused:
-            return LocalizedString("Command refused", comment: "Pump error code returned when command refused")
+            return LocalizedString("命令拒绝", comment: "Pump error code returned when command refused")
         case .maxSettingExceeded:
-            return LocalizedString("Max setting exceeded", comment: "Pump error code describing max setting exceeded")
+            return LocalizedString("最大设置超出了", comment: "Pump error code describing max setting exceeded")
         case .bolusInProgress:
-            return LocalizedString("Bolus in progress", comment: "Pump error code when bolus is in progress")
+            return LocalizedString("推注正在进行", comment: "Pump error code when bolus is in progress")
         case .pageDoesNotExist:
-            return LocalizedString("History page does not exist", comment: "Pump error code when invalid history page is requested")
+            return LocalizedString("历史页面不存在", comment: "Pump error code when invalid history page is requested")
         }
     }
 
     public var recoverySuggestion: String? {
         switch self {
         case .commandRefused:
-            return LocalizedString("Check that the pump is not suspended or priming, or has a percent temp basal type", comment: "Suggestions for diagnosing a command refused pump error")
+            return LocalizedString("检查泵是否没有悬挂或启动，或具有基础温度百分比", comment: "Suggestions for diagnosing a command refused pump error")
         default:
             return nil
         }

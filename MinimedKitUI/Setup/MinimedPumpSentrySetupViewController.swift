@@ -66,7 +66,7 @@ class MinimedPumpSentrySetupViewController: SetupTableViewController {
             case .notStarted:
                 footerView.primaryButton.isEnabled = true
                 activityIndicator.state = .hidden
-                footerView.primaryButton.setTitle(LocalizedString("Retry", comment: "Button title to retry sentry setup"), for: .normal)
+                footerView.primaryButton.setTitle(LocalizedString("重试", comment: "Button title to retry sentry setup"), for: .normal)
             case .listening:
                 lastError = nil
                 activityIndicator.state = .indeterminantProgress

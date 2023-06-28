@@ -36,7 +36,7 @@ struct InsulinTypeConfirmation: View {
         VStack {
             List {
                 Section {
-                    Text(LocalizedString("Select the type of insulin that you will be using in this pump.", comment: "Title text for insulin type confirmation page"))
+                    Text(LocalizedString("选择您将在此泵中使用的胰岛素类型。", comment: "Title text for insulin type confirmation page"))
                 }
                 Section {
                     InsulinTypeChooser(insulinType: $insulinType, supportedInsulinTypes: supportedInsulinTypes)
@@ -46,14 +46,14 @@ struct InsulinTypeConfirmation: View {
             .insetGroupedListStyle()
             
             Button(action: { self.continueWithType(insulinType) }) {
-                Text(LocalizedString("Continue", comment: "Text for continue button"))
+                Text(LocalizedString("继续", comment: "Text for continue button"))
                     .actionButtonStyle(.primary)
                     .padding()
             }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
+                Button(LocalizedString("取消", comment: "Cancel button title"), action: {
                     didCancel()
                 })
             }
