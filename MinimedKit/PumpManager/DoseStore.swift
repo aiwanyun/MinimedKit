@@ -29,7 +29,7 @@ extension Collection where Element == TimestampedHistoryEvent {
 
             switch event.pumpEvent {
             case let bolus as BolusNormalPumpEvent:
-                title = LocalizedString("推注", comment: "Event title for bolus")
+                title = LocalizedString("大剂量", comment: "Event title for bolus")
                 let bolusEndDate: Date
                 if let lastSuspend = lastSuspend, bolus.programmed != bolus.amount, lastSuspend.startDate > event.date {
                     bolusEndDate = lastSuspend.startDate
