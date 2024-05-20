@@ -20,7 +20,7 @@ extension HistoryPageError: LocalizedError {
         case .invalidCRC:
             return LocalizedString("历史页面失败CRC检查", comment: "Error description for history page failing crc check")
         case .unknownEventType(let eventType):
-            return String(format: LocalizedString("未知的历史记录类型：%$1@", comment: "Format string for error description for an unknown record type in a history page. (1: event type number)"), eventType)
+            return String(format: LocalizedString("Unknown history record type: %$1@", comment: "Format string for error description for an unknown record type in a history page. (1: event type number)"), eventType)
         }
     }
 }

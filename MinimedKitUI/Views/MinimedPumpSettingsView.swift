@@ -156,7 +156,7 @@ struct MinimedPumpSettingsView: View {
                     }
                 }
                 HStack {
-                    Text(LocalizedString("抽水时间", comment: "The title of the command to change pump time zone"))
+                    Text(LocalizedString("泵送时间", comment: "The title of the command to change pump time zone"))
                     Spacer()
                     if viewModel.isClockOffset {
                         Image(systemName: "clock.fill")
@@ -216,7 +216,7 @@ struct MinimedPumpSettingsView: View {
 
         .insetGroupedListStyle()
         .navigationBarItems(trailing: doneButton)
-        .navigationBarTitle(String(format: LocalizedString("美敦力%1$@", comment: "Format string fof navigation bar title for MinimedPumpSettingsView (1: model number)"), viewModel.pumpManager.state.pumpModel.description))
+        .navigationBarTitle(String(format: LocalizedString("Medtronic %1$@", comment: "Format string fof navigation bar title for MinimedPumpSettingsView (1: model number)"), viewModel.pumpManager.state.pumpModel.description))
     }
 
     var deliverySectionTitle: String {
@@ -237,7 +237,7 @@ struct MinimedPumpSettingsView: View {
                         .font(.system(size: 34))
                         .fixedSize()
                         .foregroundColor(viewModel.suspendResumeButtonColor(guidanceColors: guidanceColors))
-                    Text(LocalizedString("胰岛素\n暂停", comment: "Text shown in insulin delivery space when insulin suspended"))
+                    Text(LocalizedString("Insulin\nSuspended", comment: "Text shown in insulin delivery space when insulin suspended"))
                         .fontWeight(.bold)
                         .fixedSize()
                 }

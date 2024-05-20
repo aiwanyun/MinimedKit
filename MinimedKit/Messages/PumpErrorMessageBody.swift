@@ -31,7 +31,7 @@ public enum PumpErrorCode: UInt8, CustomStringConvertible {
     public var recoverySuggestion: String? {
         switch self {
         case .commandRefused:
-            return LocalizedString("检查泵是否没有悬挂或启动，或具有基础温度百分比", comment: "Suggestions for diagnosing a command refused pump error")
+            return LocalizedString("检查泵是否没有悬挂或启动，或具有临时基础率百分比", comment: "Suggestions for diagnosing a command refused pump error")
         default:
             return nil
         }

@@ -46,7 +46,7 @@ extension SetBolusError: LocalizedError {
         case .certain(let error):
             return error.errorDescription
         case .uncertain:
-            return LocalizedString("Loop向泵发送了推注命令，但无法确认该泵接收了命令。为了安全起见，循环将假设推注已交付。当Loop最终从泵中获取历史记录，并通过了估计的推注完成时间时，LOOP将更新其交付记录以匹配泵的报告。", comment: "Help anchor for uncertain bolus")
+            return LocalizedString("Loop向泵发送了推注命令，但无法确认该泵接收了命令。为了安全起见，闭环将假设推注已交付。当Loop最终从泵中获取历史记录，并通过了估计的推注完成时间时，LOOP将更新其交付记录以匹配泵的报告。", comment: "Help anchor for uncertain bolus")
         }
     }
 }

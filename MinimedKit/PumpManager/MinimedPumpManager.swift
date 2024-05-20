@@ -17,22 +17,18 @@ public protocol MinimedPumpManagerStateObserver: AnyObject {
 
 public class MinimedPumpManager: RileyLinkPumpManager {
     
-    public static let managerIdentifier = "Minimed500"
+    public static let pluginIdentifier = "Minimed500"
 
     // Primarily used for testing
     public let dateGenerator: () -> Date
-    
-    public var managerIdentifier: String {
-        return MinimedPumpManager.managerIdentifier
-    }
-    
+        
     public init(state: MinimedPumpManagerState, rileyLinkDeviceProvider: RileyLinkDeviceProvider, pumpOps: PumpOps? = nil, dateGenerator: @escaping () -> Date = Date.init) {
         self.lockedState = Locked(state)
 
         self.dateGenerator = dateGenerator
 
         self.hkDevice = HKDevice(
-            name: MinimedPumpManager.managerIdentifier,
+            name: MinimedPumpManager.pluginIdentifier,
             manufacturer: "Medtronic",
             model: state.pumpModel.rawValue,
             hardwareVersion: nil,
@@ -265,8 +261,8 @@ public class MinimedPumpManager: RileyLinkPumpManager {
                 state.lastRileyLinkBatteryAlertDate = dateGenerator()
             }
             self.pumpDelegate.notify { delegate in
-                let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: "lowRLBattery")
-                let alertBody = String(format: LocalizedString("\"%1$@\"电池电量低", comment: "Format string for low battery alert body for RileyLink. (1: device name)"), device.name ?? "unnamed")
+                let identifier = Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: "lowRLBattery")
+                let alertBody = String(format: LocalizedString("\"%1$@\" has a low battery", comment: "Format string for low battery alert body for RileyLink. (1: device name)"), device.name ?? "unnamed")
                 let content = Alert.Content(title: LocalizedString("低分子电池", comment: "Title for RileyLink low battery alert"), body: alertBody, acknowledgeActionButtonLabel: LocalizedString("好的", comment: "Acknowledge button label for RileyLink low battery alert"))
                 delegate?.issueAlert(Alert(identifier: identifier, foregroundContent: content, backgroundContent: content, trigger: .immediate))
             }
@@ -476,7 +472,7 @@ extension MinimedPumpManager {
         
         if date.timeIntervalSince(lastSync(for: state, recents: recents) ?? .distantPast) > .minutes(12) {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString("信号损失", comment: "Status highlight when communications with the pod haven't happened recently."),
+                localizedMessage: LocalizedString("信号丢失", comment: "Status highlight when communications with the pod haven't happened recently."),
                 imageName: "exclamationmark.circle.fill",
                 state: .critical)
         }
@@ -493,7 +489,7 @@ extension MinimedPumpManager {
     }
     
     private static var pumpBatteryLowAlertIdentifier: Alert.Identifier {
-        return Alert.Identifier(managerIdentifier: managerIdentifier, alertIdentifier: "PumpBatteryLow")
+        return Alert.Identifier(managerIdentifier: pluginIdentifier, alertIdentifier: "PumpBatteryLow")
     }
 
     private var pumpBatteryLowAlert: Alert {
@@ -558,7 +554,7 @@ extension MinimedPumpManager {
     }
 
     private static var pumpReservoirEmptyAlertIdentifier: Alert.Identifier {
-        return Alert.Identifier(managerIdentifier: managerIdentifier, alertIdentifier: "PumpReservoirEmpty")
+        return Alert.Identifier(managerIdentifier: pluginIdentifier, alertIdentifier: "PumpReservoirEmpty")
     }
 
     private var pumpReservoirEmptyAlert: Alert {
@@ -569,7 +565,7 @@ extension MinimedPumpManager {
     }
 
     private static var pumpReservoirLowAlertIdentifier: Alert.Identifier {
-        return Alert.Identifier(managerIdentifier: managerIdentifier, alertIdentifier: "PumpReservoirLow")
+        return Alert.Identifier(managerIdentifier: pluginIdentifier, alertIdentifier: "PumpReservoirLow")
     }
 
     private func pumpReservoirLowAlertForAmount(_ units: Double, andTimeRemaining remaining: TimeInterval?) -> Alert {
@@ -776,7 +772,7 @@ extension MinimedPumpManager {
 
                         self.log.default("Reporting new pump events: %{public}@", String(describing: remainingHistoryEvents + pendingEvents))
 
-                        delegate.pumpManager(self, hasNewPumpEvents: remainingHistoryEvents + pendingEvents, lastReconciliation: self.state.lastReconciliation, completion: { (error) in
+                        delegate.pumpManager(self, hasNewPumpEvents: remainingHistoryEvents + pendingEvents, lastReconciliation: self.state.lastReconciliation, replacePendingEvents: true) { (error) in
                             // Called on an unknown queue by the delegate
                             if error == nil {
                                 self.recents.lastAddedPumpEvents = self.dateGenerator()
@@ -797,7 +793,7 @@ extension MinimedPumpManager {
                                 })
                             }
                             completion(error)
-                        })
+                        }
                     })
                 } catch let error {
                     self.troubleshootPumpComms(using: device)
@@ -819,7 +815,7 @@ extension MinimedPumpManager {
                 preconditionFailure("pumpManagerDelegate cannot be nil")
             }
 
-            delegate.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: self.state.lastReconciliation, completion: { (error) in
+            delegate.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: self.state.lastReconciliation, replacePendingEvents: true) { (error) in
                 // Called on an unknown queue by the delegate
                 if let error = error {
                     self.log.error("Pump event storage failed: %{public}@", String(describing: error))
@@ -827,7 +823,7 @@ extension MinimedPumpManager {
                 } else {
                     completion(nil)
                 }
-            })
+            }
         })
     }
 
@@ -913,10 +909,10 @@ extension MinimedPumpManager {
 // MARK: - PumpManager
 extension MinimedPumpManager: PumpManager {
     
-    public static let localizedTitle = LocalizedString("最小化500/700系列", comment: "Generic title of the minimed pump manager")
+    public static let localizedTitle = LocalizedString("最小化", comment: "Generic title of the minimed pump manager")
 
     public var localizedTitle: String {
-        return String(format: LocalizedString("最小化%@", comment: "Pump title (1: model number)"), state.pumpModel.rawValue)
+        return String(format: LocalizedString("Minimed %@", comment: "Pump title (1: model number)"), state.pumpModel.rawValue)
     }
 
     public static var onboardingMaximumBasalScheduleEntryCount: Int {

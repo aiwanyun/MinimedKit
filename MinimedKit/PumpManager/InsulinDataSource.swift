@@ -18,7 +18,7 @@ public enum InsulinDataSource: Int, CustomStringConvertible, CaseIterable {
         case .pumpHistory:
             return LocalizedString("事件历史", comment: "Describing the pump history insulin data source")
         case .reservoir:
-            return LocalizedString("水库", comment: "Describing the reservoir insulin data source")
+            return LocalizedString("储液器", comment: "Describing the reservoir insulin data source")
         }
     }
 }

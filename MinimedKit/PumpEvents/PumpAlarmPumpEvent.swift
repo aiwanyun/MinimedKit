@@ -54,7 +54,7 @@ extension PumpAlarmType {
         case .batteryOutLimitExceeded:
             return LocalizedString("电池限制", comment: "Title for PumpAlarmType.batteryOutLimitExceeded")
         case .noDelivery:
-            return LocalizedString("没有交货警报", comment: "Title for PumpAlarmType.noDelivery")
+            return LocalizedString("没有交互警报", comment: "Title for PumpAlarmType.noDelivery")
         case .batteryDepleted:
             return LocalizedString("电池耗尽", comment: "Title for PumpAlarmType.batteryDepleted")
         case .deviceReset:
@@ -66,7 +66,7 @@ extension PumpAlarmType {
         case .reprogramError:
             return LocalizedString("重编程错误", comment: "Title for PumpAlarmType.reprogramError")
         case .emptyReservoir:
-            return LocalizedString("空库", comment: "Title for PumpAlarmType.emptyReservoir")
+            return LocalizedString("空储液器", comment: "Title for PumpAlarmType.emptyReservoir")
         case .unknownType:
             return LocalizedString("未知警报", comment: "Title for PumpAlarmType.unknownType")
         }

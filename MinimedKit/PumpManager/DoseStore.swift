@@ -29,7 +29,7 @@ extension Collection where Element == TimestampedHistoryEvent {
 
             switch event.pumpEvent {
             case let bolus as BolusNormalPumpEvent:
-                title = LocalizedString("大剂量", comment: "Event title for bolus")
+                title = LocalizedString("推注", comment: "Event title for bolus")
                 let bolusEndDate: Date
                 if let lastSuspend = lastSuspend, bolus.programmed != bolus.amount, lastSuspend.startDate > event.date {
                     bolusEndDate = lastSuspend.startDate
@@ -55,14 +55,14 @@ extension Collection where Element == TimestampedHistoryEvent {
                     lastTempBasal = DoseEntry(type: .tempBasal, startDate: event.date, value: temp.rate, unit: .unitsPerHour, isMutable: false, wasProgrammedByPumpUI: !temp.wasRemotelyTriggered)
                     continue
                 } else {
-                    title = LocalizedString("温度基础百分比", comment: "Event title for percent based temp basal")
+                    title = LocalizedString("临时基础率百分比", comment: "Event title for percent based temp basal")
                 }
             case let tempDuration as TempBasalDurationPumpEvent:
                 if let lastTemp = lastTempBasal, lastTemp.startDate == event.date {
                     if tempDuration.duration == 0 {
                         title = LocalizedString("取消临时基础", comment: "Event title for temp basal cancel")
                     } else {
-                        title = LocalizedString("温度基", comment: "Event title for temporary basal rate start")
+                        title = LocalizedString("临时基础率", comment: "Event title for temporary basal rate start")
                     }
 
                     // Temp basal events in mdt pump history are not mutable, but we report mutability to Loop as
@@ -95,7 +95,7 @@ extension Collection where Element == TimestampedHistoryEvent {
                     isMutable: false
                 )
             case is RewindPumpEvent:
-                title = LocalizedString("倒带", comment: "Event title for rewind")
+                title = LocalizedString("回退", comment: "Event title for rewind")
                 eventType = .rewind
 
                 /* 
@@ -107,9 +107,15 @@ extension Collection where Element == TimestampedHistoryEvent {
                  */
                 dose = DoseEntry(suspendDate: event.date)
                 isRewound = true
-            case is PrimePumpEvent:
+            case let prime as PrimePumpEvent:
                 title = LocalizedString("主要的", comment: "Event title for prime pump event")
                 eventType = .prime
+
+                if prime.primeType == .fixed {
+                    let setChangeRaw = "SetChange\(event.date)".data(using: .utf8)!
+                    events.append(NewPumpEvent(date: event.date, dose: nil, raw: setChangeRaw, title: "Set Change (fixed prime)", type: .replaceComponent(componentType:
+                            .infusionSet)))
+                }
 
                 if isRewound {
                     isRewound = false
